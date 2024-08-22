@@ -163,18 +163,19 @@ class FlexibleAttention(nn.Module):
         out = rearrange(out, "b h n d -> b n (h d)")
         return self.to_out(out)
 
-position_encoder = LierePositionEncoder((224,224), (16,16), 128, 8, 2)
-attn = FlexibleAttention(128, 8, 128//8, 0)
-
-img_sizes = torch.tensor([[224,224]])
-position_encodings = position_encoder(img_sizes, torch.float32)
-
-fake_tokens = torch.rand((2, 1 + (224//16)**2, 128)) # 1 is coming from the CLS token
-
-print(fake_tokens.shape)
-print(f'Positional transforms shape {position_encodings.shape}')
-embeddings = attn(fake_tokens, position_encodings)
-
-assert fake_tokens.shape == embeddings.shape
-
-print("Done")
+if __name__ == '__main__':
+    position_encoder = LierePositionEncoder((224,224), (16,16), 128, 8, 2)
+    attn = FlexibleAttention(128, 8, 128//8, 0)
+    
+    img_sizes = torch.tensor([[224,224]])
+    position_encodings = position_encoder(img_sizes, torch.float32)
+    
+    fake_tokens = torch.rand((2, 1 + (224//16)**2, 128)) # 1 is coming from the CLS token
+    
+    print(fake_tokens.shape)
+    print(f'Positional transforms shape {position_encodings.shape}')
+    embeddings = attn(fake_tokens, position_encodings)
+    
+    assert fake_tokens.shape == embeddings.shape
+    
+    print("Done")
