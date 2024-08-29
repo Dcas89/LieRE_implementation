@@ -57,8 +57,7 @@ class LierePositionEncoder(PositionEncoderBase):
                 self.head_dim,
                 self.head_dim,
             )
-            * 2
-            * math.pi  # RoPE-Mixed drew random angles from zero to 2 pi. https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
+            # RoPE-Mixed scaled by 2 pi, this can be tuned, we left it out for ease of comparison. https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
         )
 
     def forward(self, image_sizes: torch.Tensor, dtype):
