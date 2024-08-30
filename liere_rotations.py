@@ -56,8 +56,8 @@ class LierePositionEncoder(PositionEncoderBase):
                 1, # Replace with proper value if you want to use a block-diagonal generator
                 self.head_dim,
                 self.head_dim,
-            )
-            # RoPE-Mixed scaled by 2 pi, this can be tuned, we left it out for ease of comparison. https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
+            ) *
+            match.pi * 2 # RoPE-Mixed scaled by 2 pi, scaling by a constant https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
         )
 
     def forward(self, image_sizes: torch.Tensor, dtype):
