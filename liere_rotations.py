@@ -57,7 +57,7 @@ class LierePositionEncoder(PositionEncoderBase):
                 self.head_dim,
                 self.head_dim,
             ) *
-            match.pi * 2 # RoPE-Mixed scaled by 2 pi, scaling by a constant https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
+            math.pi * 2 # RoPE-Mixed scaled by 2 pi, scaling by a constant https://github.com/naver-ai/rope-vit/blob/c6aa201ee795daa4f841e2f9585164bb23a0b819/deit/models_v2_rope.py#L25
         )
 
     def forward(self, image_sizes: torch.Tensor, dtype):
